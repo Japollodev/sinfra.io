@@ -1,0 +1,229 @@
+@import 'tailwindcss';
+
+/* ───────────────────────── Brand tokens ─────────────────────────
+   Defined here as Tailwind v4 theme variables, so they become
+   utilities: bg-navy, text-gold, border-gold-light, font-display, etc.
+   Change a value here and it changes everywhere.                   */
+@theme {
+  --color-navy: #1a2538;
+  --color-navy-mid: #26344b;
+  --color-navy-card: #2e3f5c;
+
+  --color-gold: #9f8d56;
+  --color-gold-light: #c4ae72;
+  --color-gold-bright: #e3d3a4;
+
+  --color-parchment: #f7f4ee;
+  --color-parchment-border: #e0d8c8;
+
+  --color-body: #a8b8cc;
+  --color-muted: #8fa3b8;
+
+  --font-display: 'Sora', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ───────────────────────── Base ───────────────────────── */
+html {
+  scroll-behavior: smooth;
+  background: var(--color-navy);
+}
+
+body {
+  margin: 0;
+  background: var(--color-navy);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Visible keyboard focus — the mockup had none. */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 3px;
+}
+
+/* ───────────────────────── Keyframes ───────────────────────── */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(34px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes barGrow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* The `kin` keyframes are generated at runtime in Hero.jsx, because the
+   translate steps depend on how many words are in the cycling list. */
+
+/* ───────────────────── Hero entrance ───────────────────── */
+.hero-a {
+  animation: riseIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.d1 {
+  animation-delay: 0.05s;
+}
+.d2 {
+  animation-delay: 0.17s;
+}
+.d3 {
+  animation-delay: 0.29s;
+}
+.d4 {
+  animation-delay: 0.41s;
+}
+.d5 {
+  animation-delay: 0.53s;
+}
+
+.rule-a {
+  transform-origin: left center;
+  animation: barGrow 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+/* ───────────────── Kinetic headline word ─────────────────
+   .kin-wrap is a full-width mask exactly one line tall; the stack
+   inside it slides up one line per word. white-space: nowrap keeps
+   each word on a single line, which the translate math depends on. */
+.kin-wrap {
+  display: block;
+  overflow: hidden;
+  height: 1.16em;
+}
+.kin {
+  display: block;
+}
+.kin > span {
+  display: block;
+  height: 1.16em;
+  line-height: 1.16;
+  white-space: nowrap;
+}
+
+/* ───────────────────────── Marquee ───────────────────────── */
+.mq {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--mq-duration, 34s) linear infinite;
+}
+
+/* ──────────────── Scroll reveals (progressive) ────────────────
+   .reveal is added by JS, so if JS never runs the content is simply
+   visible rather than stuck at opacity 0. */
+.reveal {
+  opacity: 0;
+}
+.reveal.in {
+  animation: riseIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ───────────────────── Interactive states ───────────────────── */
+.row-link {
+  transition: background-color 0.25s ease;
+}
+.row-link:hover {
+  background-color: rgb(159 141 86 / 0.07);
+}
+.row-link:hover .row-num {
+  color: var(--color-gold-light);
+}
+.row-link:hover .row-arrow {
+  transform: translateX(12px);
+}
+.row-arrow {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.row-num {
+  transition: color 0.25s ease;
+}
+
+.card-lift {
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+  border-color: rgb(159 141 86 / 0.5);
+}
+
+.btn-g {
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+.btn-g:hover {
+  background-color: var(--color-gold-light);
+  transform: translateY(-2px);
+}
+
+.btn-o {
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+.btn-o:hover {
+  border-color: rgb(159 141 86 / 0.7);
+  color: #fff;
+}
+
+.nav-l {
+  transition: color 0.2s ease;
+}
+.nav-l:hover {
+  color: var(--color-gold-light);
+}
+
+/* ───────────────────── Motion off ─────────────────────
+   Set MOTION = false in src/content.js, or respect the visitor's
+   system setting below. */
+.no-motion .kin,
+.no-motion .mq,
+.no-motion .hero-a,
+.no-motion .rule-a {
+  animation: none !important;
+}
+.no-motion .reveal {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .kin,
+  .mq,
+  .hero-a,
+  .rule-a {
+    animation: none !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
