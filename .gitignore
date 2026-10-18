@@ -11,8 +11,14 @@ lerna-debug.log*
 node_modules
 
 # Build output
+# Root build, any nested dist directory, and Vite's SSR output.
+# A directory pattern ignores every file inside, including hashed assets.
 dist
+/dist/
+**/dist/
 dist-ssr
+/dist-ssr/
+**/dist-ssr/
 *.local
 
 # Environment
