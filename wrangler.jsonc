@@ -1,0 +1,17 @@
+{
+    "name": "sinfra-io",
+    "compatibility_date": "2026-10-12",
+    "routes": [
+      {
+        "pattern": "sinfra.io",
+        "custom_domain": true,
+        "previews_enabled": true
+      },
+      {
+        "pattern": "*.sinfra.io/*",
+        "zone_name": "sinfra.io"
+      }
+    ],
+    "previews": {}
+  }
+    
