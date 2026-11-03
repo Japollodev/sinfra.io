@@ -8,7 +8,7 @@
 export const MOTION = true
 
 export const CONTACT = {
-  email: 'joel.mcgill@sinfra.io',
+  email: 'joel@sinfra.io',
   calendly: 'https://calendly.com/sinfra/intro-call',
 }
 
