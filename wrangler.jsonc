@@ -12,6 +12,8 @@
         "zone_name": "sinfra.io"
       }
     ],
-    "previews": {}
+    "previews": {},
+    "assets": {
+        "directory": "./dist"
+    }
   }
-    
